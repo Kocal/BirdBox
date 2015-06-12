@@ -20,6 +20,8 @@ oiseau_dedans=0
 ## Programme
 while true
 do
+	la_date=`date "+%Y-%m-%d_%H-%M-%S-%2N"`
+
 	# On attend 200 ms pour ne pas surcharger la Raspberry <3
 	sleep .2
 
@@ -35,18 +37,23 @@ do
 		fi
 
 		# On allume une led en fonction de la position de l'oiseau
-		if [ $oiseau_dedans -eq 0 ]
+		if [ $oiseau_dedans -eq 1 ]
 		then
-			$gpio write $oiseau_sortie 1
-		else
 			$gpio write $oiseau_entree 1
+
+			echo "[$la_date] Omg un oisal !!!!"
+			# Un oiseau est rentré, on prend une photo :d
+			raspistill -t 3 -o "pics/"$la_date".jpg"
+			
+		else
+			$gpio write $oiseau_sortie 1
 		fi
 
 		# On attend que le détecteur de mouvement ne détecte plus rien
 		while [ `$gpio read $detect` -eq 1 ]
 		do 
-			echo "On slaque"
-			sleep .5
+			echo "[$la_date] ..."
+			sleep .2
 		done
 
 		# Reset
@@ -54,7 +61,7 @@ do
 		$gpio write $oiseau_entree 0
 
 	else
-		echo "Aucun oiseau n'est passé par ici"
+		echo "[$la_date] Aucun oiseau n'est passé par ici"
 	fi
 
 	
