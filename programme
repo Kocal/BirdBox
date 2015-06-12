@@ -1,0 +1,64 @@
+#!/bin/sh
+
+## Quand le script est exécuté au démarrage, la variable $PATH
+## est encore vide. On indique donc le chemin vers gpio
+gpio="/usr/local/bin/gpio"
+
+## Définition des pins
+detect=1
+oiseau_entree=4
+oiseau_sortie=5
+
+## Définition du mode des pins
+$gpio mode $detect in
+$gpio mode $oiseau_entree out
+$gpio mode $oiseau_sortie out
+
+## Variables globales
+oiseau_dedans=0
+
+## Programme
+while true
+do
+	# On attend 200 ms pour ne pas surcharger la Raspberry <3
+	sleep .2
+
+	# On test si on a une tension de sortie sur le détecteur de mouvement
+	if [ `$gpio read $detect` -eq 1 ]
+	then
+		# On vérifie si l'oiseau est déjà dans la cage
+		if [ $oiseau_dedans -eq 0 ]
+		then
+			oiseau_dedans=1
+		else
+			oiseau_dedans=0
+		fi
+
+		# On allume une led en fonction de la position de l'oiseau
+		if [ $oiseau_dedans -eq 0 ]
+		then
+			$gpio write $oiseau_sortie 1
+		else
+			$gpio write $oiseau_entree 1
+		fi
+
+		# On attend que le détecteur de mouvement ne détecte plus rien
+		while [ `$gpio read $detect` -eq 1 ]
+		do 
+			echo "On slaque"
+			sleep .5
+		done
+
+		# Reset
+		$gpio write $oiseau_sortie 0
+		$gpio write $oiseau_entree 0
+
+	else
+		echo "Aucun oiseau n'est passé par ici"
+	fi
+
+	
+
+	
+
+done
