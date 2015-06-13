@@ -50,5 +50,18 @@ require_once 'inc/header.php';
             }
         });
     </script>
+
+    <script>
+	setInterval(function() {
+		var counter = 0;
+
+		while(jwplayer().getState() === 'IDLE') {
+		    jwplayer().play();
+		    counter++;
+		}
+
+		counter = 0;
+	}, 1000);
+    </script>    
 <?php
 require_once 'inc/footer.php';

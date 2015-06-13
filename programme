@@ -1,8 +1,10 @@
 #!/bin/sh
 
-## Quand le script est exécuté au démarrage, la variable $PATH
-## est encore vide. On indique donc le chemin vers gpio
+## Quand le script est exécuté au démarrage, la variable $PATH est encore vide.
 gpio="/usr/local/bin/gpio"
+raspistill="/usr/bin/raspistill"
+raspivid="/usr/bin/raspivid"
+convert="/usr/bin/convert"
 
 ## Définition des pins
 detect=1
@@ -41,12 +43,20 @@ do
 		then
 			$gpio write $oiseau_entree 1
 
-			echo "[$la_date] Omg un oisal d'entrer !!!"
+			echo "[$la_date] Omg un oisal vient d'entrer !!!"
+			
+			# Cut le stream comme un porc
+			kill -9 `ps ax | grep $raspivid | tr -d '[:space:]' | grep -Eo '[0-9]*' | head -n 1`
+
+
 			# Un oiseau est rentré, on prend une photo :d
-			raspistill -t 3 -o "pics/"$la_date".jpg"
+			$raspistill -t 1 -o "public/pics/"$la_date".jpg"
 
 			# Création de la miniature
-			convert "pics/"$la_date".jpg" -gravity Center -thumbnail 300x200^ "pics/"$la_date"_thumbnail.jpg"
+			$convert "public/pics/"$la_date".jpg" -gravity Center -thumbnail 300x200^ "public/pics/"$la_date"_thumbnail.jpg"
+
+			# On relance le stream
+			./stream&
 		else
 			$gpio write $oiseau_sortie 1
 			echo "[$la_date] Omg l'oisal est sorti !!"

@@ -35,11 +35,11 @@ foreach ($files as $file) {
     $thumbnail = $dir . '/' . $date . '_' . $heure . '_thumbnail.jpg';
 
     // list($width, $height) = getimagesize($file);
-    // list($width, $height) = getimagesize($thumbnail);
+    list($width, $height) = getimagesize($thumbnail);
 
-    $width = 300;
-    $height = 200;
-    $thumbnail = 'http://lorempicsum.com/simpsons/300/200/2';
+    // $width = 300;
+    // $height = 200;
+    // $thumbnail = 'http://lorempicsum.com/simpsons/300/200/2';
 
     $pics[$date][] = [
         'file' => $file,
@@ -56,6 +56,11 @@ foreach ($files as $file) {
 }
 
 $pics = array_reverse($pics);
+
+foreach($pics as $k => $blbl) {
+	usort($pics[$k], 'sortByTimestamp');
+}
+
 ?>
     <main role="main">
         <h2 class="page-title">Photos taken by the Raspberry Pi</h2>
