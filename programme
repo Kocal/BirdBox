@@ -22,8 +22,8 @@ while true
 do
 	la_date=`date "+%Y-%m-%d_%H-%M-%S-%2N"`
 
-	# On attend 200 ms pour ne pas surcharger la Raspberry <3
-	sleep .2
+	# On attend 500 ms pour ne pas surcharger la Raspberry <3
+	sleep .5
 
 	# On test si on a une tension de sortie sur le détecteur de mouvement
 	if [ `$gpio read $detect` -eq 1 ]
@@ -63,9 +63,5 @@ do
 	else
 		echo "[$la_date] Aucun oiseau n'est passé par ici"
 	fi
-
-	
-
-	
 
 done
