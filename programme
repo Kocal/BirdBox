@@ -6,8 +6,8 @@ gpio="/usr/local/bin/gpio"
 
 ## Définition des pins
 detect=1
-oiseau_entree=4
-oiseau_sortie=5
+oiseau_entree=5
+oiseau_sortie=4
 
 ## Définition du mode des pins
 $gpio mode $detect in
@@ -41,12 +41,13 @@ do
 		then
 			$gpio write $oiseau_entree 1
 
-			echo "[$la_date] Omg un oisal !!!!"
+			echo "[$la_date] Omg un oisal d'entrer !!!"
 			# Un oiseau est rentré, on prend une photo :d
 			raspistill -t 3 -o "pics/"$la_date".jpg"
 			
 		else
 			$gpio write $oiseau_sortie 1
+			echo "[$la_date] Omg l'oisal est sorti !!"
 		fi
 
 		# On attend que le détecteur de mouvement ne détecte plus rien
