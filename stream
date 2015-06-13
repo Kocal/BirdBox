@@ -1,0 +1,4 @@
+#!/bin/sh
+
+raspivid -t 0 -p "0,0,0,0" -h 720 -w 1280 -fps 25 -b 500000 -vf -o - | ffmpeg -i - -vcodec copy -an -f flv -metadata streamName=myStream tcp://0.0.0.0:6666
+
