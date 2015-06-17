@@ -3,13 +3,124 @@
  * 1. Base
  */
 
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+h1 {
+    margin: 0;
+    padding: 1em 0;
+}
+
+figure {
+    display: inline-block;
+    margin: 0;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #d1d1d1;
+    border-bottom: 1px solid #f6f6f6;
+}
 /**
  * 2. Agencement
  */
 
+#wrapper,
+footer[role="contentinfo"] {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 960px;
+    width: 100%;
+}
+
+footer[role="contentinfo"]  {
+    max-width: 450px;
+    padding: .3rem 1rem;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+/**
+ * Header
+ */
+header[role="banner"],
+figure {
+    text-align: center;
+}
+
+/**
+ * Navigation
+ */
+nav[role="navigation"] ul {
+    margin-top: 0;
+}
+
+nav[role="navigation"] ul li {
+    display: inline-block;
+}
+
+nav[role="navigation"] ul li a {
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px;
+}
+
+/**
+ * Better HTML menu
+ */
+.betterhtmlmenu-0 {
+    font-size: 1.3rem;
+    width: 100%;
+}
+
+.betterhtmlmenu-0 select {
+    width: 100%;
+}
+
+/**
+ * Corps
+ */
+.page-title {
+    text-align: center;
+}
+
+.thin {
+    font-weight: normal;
+}
+
+/**
+ * Footer
+ */
+footer[role="contentinfo"] {
+    border-radius: 5px;
+    color: #535353;
+    background: #e8e8e8;
+    text-align: center;
+}
+
 /**
  * 3. Modules
  */
+/**
+ * Le stream
+ */
+#video-jwplayer_wrapper {
+    width: 100%    !important;
+    height: auto   !important;
+    /*padding-top: 25px;*/
+    padding-bottom: 56.25%; /* 16:9 */
+}
+
+#video-jwplayer_wrapper object {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
 /**
  * 4. Etats
@@ -18,6 +129,41 @@
 /**
  * 5. Thème
  */
+
 header[role="banner"] {
     background-color: #55acee;
+}
+
+header[role="banner"] a {
+    color: #fff;
+    font-family: 'Open Sans';
+    text-decoration: none;
+}
+
+nav[role="navigation"] ul {
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}
+
+nav[role="navigation"] ul li a,
+.betterhtmlmenu-0 {
+    color: #292929;
+}
+
+nav[role="navigation"] ul li a:hover {
+    background: rgba(0, 0, 0, .1);
+}
+
+/**
+ * Dégradés
+ */
+.gd-white-grey {
+    background: #fcfffe; /* Old browsers */
+    background: -moz-linear-gradient(top,  #fcfffe 0%, #eff2f2 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfffe), color-stop(100%,#eff2f2));
+    background: -webkit-linear-gradient(top,  #fcfffe 0%,#eff2f2 100%);
+    background: -o-linear-gradient(top,  #fcfffe 0%,#eff2f2 100%);
+    background: -ms-linear-gradient(top,  #fcfffe 0%,#eff2f2 100%);
+    background: linear-gradient(to bottom,  #fcfffe 0%,#eff2f2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfffe', endColorstr='#eff2f2',GradientType=0 );
+
 }

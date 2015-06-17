@@ -1,0 +1,13 @@
+/* Always hide Better-HTML-menu by default */
+
+[class^="betterhtmlmenu"] { display: none; }
+
+/* When width is less than 720px */
+@media (max-width: 720px), (max-device-width: 720px) {
+
+    /* We hide the old menu */
+    [class^="betterhtmlmenu"] + nav { display: none; }
+
+    /* And we show the new one */
+    [class^="betterhtmlmenu"] { display: inline-block; }
+}

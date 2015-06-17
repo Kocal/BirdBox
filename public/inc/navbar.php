@@ -1,8 +1,8 @@
-<nav role="navigation">
+<nav role="navigation" class="gd-white-grey">
     <ul>
-        <li><a href="/">Accueil</a></li>
-        <li><a href="/stream.php">Diffusion en direct</a></li>
-        <li><a href="/pics.php">Voir les photos</a></li>
-        <li><a href="/projet.php">Projet</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/stream.php">Streaming</a></li>
+        <li><a href="/photos.php">Photos</a></li>
+        <li><a href="/projet.php">Project</a></li>
     </ul>
 </nav>
