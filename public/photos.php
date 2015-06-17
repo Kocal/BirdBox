@@ -19,20 +19,19 @@ foreach ($directoryIterator as $file) {
     }
 }
 
-// On trie les photos dans l'ordre décroissant
-sort($files);
-$files = array_reverse($files);
-
 /**
  * Tableau de photos triées
  */
 $pics = [];
-
-/**
- * Traitement
- */
 foreach ($files as $file) {
     list($date, $heure) = explode('_', str_replace($dir . '/', '', explode('.', $file)[0]));
+
+//    var_dump('--');
+//    var_dump($date);
+//    var_dump($heure);
+//    var_dump(parse_date($date));
+//    var_dump(parse_heure($heure));
+
     $thumbnail = $dir . '/' . $date . '_' . $heure . '_thumbnail.jpg';
 
     // list($width, $height) = getimagesize($file);
@@ -42,7 +41,6 @@ foreach ($files as $file) {
     $height = 200;
     $thumbnail = 'http://lorempicsum.com/simpsons/300/200/2';
 
-
     $pics[$date][] = [
         'file' => $file,
         'thumbnail' => [
@@ -50,13 +48,15 @@ foreach ($files as $file) {
             'width' => $width,
             'height' => $height
         ],
-        'date' => $date,
-        'heure' => $heure
+
+        'date' => parse_date($date),
+        'heure' => parse_heure($heure),
+        'timestamp' => strtotime(parse_date($date) . ' ' . parse_heure($heure))
     ];
 }
-//var_dump($pics);
-?>
 
+$pics = array_reverse($pics);
+?>
     <main role="main">
         <h2 class="page-title">Photos taken by the Raspberry Pi</h2>
         <hr/>
@@ -79,25 +79,20 @@ foreach ($files as $file) {
                 <?php foreach($pics as $date => $lesPhotos): ?>
                     <?php
                         $lesPhotos = array_reverse($lesPhotos);
-                        $date = parse_date($date);
                     ?>
 
-                    <h3 class="thin">Photos taken on <b><?= $date ?></b></h3>
+                    <h3 class="thin">Photos taken on <b><?= parse_date($date) ?></b></h3>
                     <div>
                     <?php foreach($lesPhotos as $photo): ?>
-                        <?php
-                            $heure = parse_heure($photo['heure']);
-                        ?>
-
                         <figure>
                         <a href="<?= $photo['file'] ?>">
                             <img
                                 src="<?= $photo['thumbnail']['file'] ?>"
                                 width="<?= $photo['thumbnail']['width'] ?>px"
                                 height="<?= $photo['thumbnail']['height'] ?>px"
-                                title="Photo taken on <?= $date . ' at ' . $heure ?>"
-                                alt="Photo taken on <?= $date . ' à ' . $heure ?>" /></a>
-                            <figcaption>Photo taken at <?= $heure ?></figcaption>
+                                title="Photo taken on <?= $photo['date'] . ' at ' . $photo['heure'] ?>"
+                                alt="Photo taken at <?= $photo['heure'] ?>" /></a>
+                            <figcaption>Photo taken at <?= $photo['heure'] ?></figcaption>
                         </figure>
                     <?php endforeach; ?>
                     </div>
@@ -105,24 +100,17 @@ foreach ($files as $file) {
             <?php endif; ?>
 
             <?php if(!empty($_GET['date']) && isset($pics[$_GET['date']])): ?>
-                <?php
-                    $date = parse_date($_GET['date']);
-                ?>
-                <h3 class="thin">Photos taken on <b><?= $date ?></b></h3>
+                <h3 class="thin">Photos taken on <b><?= parse_date($date) ?></b></h3>
                 <?php foreach($pics[$_GET['date']] as $photo): ?>
-                    <?php
-                        $heure = parse_heure($photo['heure']);
-                    ?>
-
                     <figure>
                         <a href="<?= $photo['file'] ?>">
                             <img
                                 src="<?= $photo['thumbnail']['file'] ?>"
                                 width="<?= $photo['thumbnail']['width'] ?>px"
                                 height="<?= $photo['thumbnail']['height'] ?>px"
-                                title="Photo taken on <?= $date . ' at ' . $heure ?>"
-                                alt="Photo taken on <?= $date . ' à ' . $heure ?>" /></a>
-                        <figcaption>Photo taken at <?= $heure ?></figcaption>
+                                title="Photo taken at <?= $photo['heure'] ?>"
+                                alt="Photo taken at <?= $photo['heure'] ?>" /></a>
+                        <figcaption>Photo taken at <?= $photo['heure'] ?></figcaption>
                     </figure>
                 <?php endforeach; ?>
             <?php endif; ?>

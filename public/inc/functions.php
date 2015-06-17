@@ -81,10 +81,13 @@ function date_en_francais($date) {
 
 function parse_heure($heure) {
     list($heures, $minutes, $secondes) = explode('-', $heure);
-
     return date('g:i:s A', strtotime($heures . ':' . $minutes . ':' . $secondes));
 }
 
 function parse_date($date) {
     return date('l, j F Y', strtotime($date));
+}
+
+function sortByTimestamp($a, $b) {
+    return $a['timestamp'] - $b['timestamp'];
 }

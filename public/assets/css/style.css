@@ -49,6 +49,10 @@ figure {
     text-align: center;
 }
 
+figcaption {
+    margin-bottom: 10px;
+}
+
 /**
  * Navigation
  */
