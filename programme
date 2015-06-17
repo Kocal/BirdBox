@@ -44,7 +44,9 @@ do
 			echo "[$la_date] Omg un oisal d'entrer !!!"
 			# Un oiseau est rentré, on prend une photo :d
 			raspistill -t 3 -o "pics/"$la_date".jpg"
-			
+
+			# Création de la miniature
+			convert "pics/"$la_date".jpg" -gravity Center -thumbnail 300x200^ "pics/"$la_date"_thumbnail.jpg"
 		else
 			$gpio write $oiseau_sortie 1
 			echo "[$la_date] Omg l'oisal est sorti !!"
@@ -52,7 +54,7 @@ do
 
 		# On attend que le détecteur de mouvement ne détecte plus rien
 		while [ `$gpio read $detect` -eq 1 ]
-		do 
+		do
 			echo "[$la_date] ..."
 			sleep .2
 		done
@@ -64,5 +66,4 @@ do
 	else
 		echo "[$la_date] Aucun oiseau n'est passé par ici"
 	fi
-
 done
