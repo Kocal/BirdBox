@@ -129,6 +129,9 @@ footer[role="contentinfo"] {
 /**
  * 5. Thème
  */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+}
 
 header[role="banner"] {
     background-color: #55acee;
@@ -136,7 +139,6 @@ header[role="banner"] {
 
 header[role="banner"] a {
     color: #fff;
-    font-family: 'Open Sans';
     text-decoration: none;
 }
 

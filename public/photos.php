@@ -10,7 +10,18 @@ $dir = 'pics';
 /**
  * On récupère les photos dans le dossier
  */
-$files = glob($dir  . '/*.jpg');
+$directoryIterator = new DirectoryIterator($dir);
+$files = [];
+
+foreach ($directoryIterator as $file) {
+    if($file->isFile() && preg_match('/^.*[^_thumbnail].jpg$/', $file->getFilename())) {
+        $files[] = $dir . '/' . $file->getFilename();
+    }
+}
+
+// On trie les photos dans l'ordre décroissant
+sort($files);
+$files = array_reverse($files);
 
 /**
  * Tableau de photos triées
@@ -24,8 +35,8 @@ foreach ($files as $file) {
     list($date, $heure) = explode('_', str_replace($dir . '/', '', explode('.', $file)[0]));
     $thumbnail = $dir . '/' . $date . '_' . $heure . '_thumbnail.jpg';
 
-    list($width, $height) = getimagesize($file);
-
+    // list($width, $height) = getimagesize($file);
+    // list($width, $height) = getimagesize($thumbnail);
 
     $width = 300;
     $height = 200;

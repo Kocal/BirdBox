@@ -82,7 +82,7 @@ function date_en_francais($date) {
 function parse_heure($heure) {
     list($heures, $minutes, $secondes) = explode('-', $heure);
 
-    return date('g:i A', strtotime($heures . ':' . $minutes . ':' . $secondes));
+    return date('g:i:s A', strtotime($heures . ':' . $minutes . ':' . $secondes));
 }
 
 function parse_date($date) {
