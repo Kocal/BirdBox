@@ -89,5 +89,5 @@ function parse_date($date) {
 }
 
 function sortByTimestamp($a, $b) {
-    return $a['timestamp'] - $b['timestamp'];
+    return $b['timestamp'] - $a['timestamp'];
 }

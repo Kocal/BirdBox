@@ -138,6 +138,7 @@ figcaption {
  * Le copyleft :3
  */
 .copyleft {
+    font-weight: bold;
     display: inline-block;
     -webkit-transform: rotate(180deg);
             transform: rotate(180deg);

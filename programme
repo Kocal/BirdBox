@@ -48,7 +48,6 @@ do
 			# Cut le stream comme un porc
 			kill -9 `ps ax | grep $raspivid | tr -d '[:space:]' | grep -Eo '[0-9]*' | head -n 1`
 
-
 			# Un oiseau est rentré, on prend une photo :d
 			$raspistill -t 1 -o "public/pics/"$la_date".jpg"
 
