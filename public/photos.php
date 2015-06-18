@@ -26,21 +26,9 @@ $pics = [];
 foreach ($files as $file) {
     list($date, $heure) = explode('_', str_replace($dir . '/', '', explode('.', $file)[0]));
 
-//    var_dump('--');
-    //    var_dump($date);
-    //    var_dump($heure);
-    //    var_dump(parse_date($date));
-    //    var_dump(parse_heure($heure));
-
     $thumbnail = $dir . '/' . $date . '_' . $heure . '_thumbnail.jpg';
-
-    // list($width, $height) = getimagesize($file);
     list($width, $height) = getimagesize($thumbnail);
-
-    // $width = 300;
-    // $height = 200;
-    // $thumbnail = 'http://lorempicsum.com/simpsons/300/200/2';
-
+ 
     $pics[$date][] = [
         'file' => $file,
         'thumbnail' => [
@@ -58,7 +46,8 @@ foreach ($files as $file) {
 /**
  * Tri des photos par ordre décroissant de date
  */
-ksort($pics);
+krsort($pics);
+//var_dump($pics);
 
 /**
  * Tri des photos par ordre décroissant de timestamp
@@ -107,7 +96,7 @@ foreach($pics as $k => $blbl) {
             <?php endif; ?>
 
             <?php if(!empty($_GET['date']) && isset($pics[$_GET['date']])): ?>
-                <h3 class="text-thin">Photos taken on <b><?= parse_date($date) ?></b></h3>
+                <h3 class="text-thin">Photos taken on <b><?= parse_date($_GET['date']) ?></b></h3>
                 <?php foreach($pics[$_GET['date']] as $photo): ?>
                     <figure class="thumbnail">
                         <a href="<?= $photo['file'] ?>">
