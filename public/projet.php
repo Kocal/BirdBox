@@ -82,13 +82,12 @@ require_once 'inc/header.php';
         </ul>
 
         <h4>Photo de la BirdBox</h4>
-        <p>Nous avons réalisé le circuit modélisé avec Fritzing pour de vrai, et nous obtenons donc ceci.</p>
+        <p>Nous avons réalisé le circuit modélisé avec Fritzing, et nous obtenons donc ceci.</p>
         <figure class="text-center">
             <img src="/assets/img/le-projet.jpg" alt="Photo of theBirdbox">
             <figcaption>Photo du projet</figcaption>
         </figure>
     
-
         <hr>
 
         <h3>Technologies utilisées</h3>
