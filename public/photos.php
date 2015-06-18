@@ -27,10 +27,10 @@ foreach ($files as $file) {
     list($date, $heure) = explode('_', str_replace($dir . '/', '', explode('.', $file)[0]));
 
 //    var_dump('--');
-//    var_dump($date);
-//    var_dump($heure);
-//    var_dump(parse_date($date));
-//    var_dump(parse_heure($heure));
+    //    var_dump($date);
+    //    var_dump($heure);
+    //    var_dump(parse_date($date));
+    //    var_dump(parse_heure($heure));
 
     $thumbnail = $dir . '/' . $date . '_' . $heure . '_thumbnail.jpg';
 
@@ -55,15 +55,21 @@ foreach ($files as $file) {
     ];
 }
 
-$pics = array_reverse($pics);
+/**
+ * Tri des photos par ordre décroissant de date
+ */
+ksort($pics);
 
+/**
+ * Tri des photos par ordre décroissant de timestamp
+ */
 foreach($pics as $k => $blbl) {
-	usort($pics[$k], 'sortByTimestamp');
+    usort($pics[$k], 'sortByTimestamp');
 }
 
 ?>
     <main role="main">
-        <h2 class="page-title">Photos taken by the Raspberry Pi</h2>
+        <h2 class="page-title">Photos taken by BirdBox</h2>
         <hr/>
         <p>
             <form action="" method="get">
@@ -82,14 +88,10 @@ foreach($pics as $k => $blbl) {
         <section>
             <?php if(empty($_GET['date']) || !empty($_GET['date']) && $_GET['date'] === 'all'): ?>
                 <?php foreach($pics as $date => $lesPhotos): ?>
-                    <?php
-                        $lesPhotos = array_reverse($lesPhotos);
-                    ?>
-
-                    <h3 class="thin">Photos taken on <b><?= parse_date($date) ?></b></h3>
+                    <h3 class="text-thin">Photos taken on <b><?= parse_date($date) ?></b></h3>
                     <div>
                     <?php foreach($lesPhotos as $photo): ?>
-                        <figure>
+                        <figure class="thumbnail">
                         <a href="<?= $photo['file'] ?>">
                             <img
                                 src="<?= $photo['thumbnail']['file'] ?>"
@@ -105,9 +107,9 @@ foreach($pics as $k => $blbl) {
             <?php endif; ?>
 
             <?php if(!empty($_GET['date']) && isset($pics[$_GET['date']])): ?>
-                <h3 class="thin">Photos taken on <b><?= parse_date($date) ?></b></h3>
+                <h3 class="text-thin">Photos taken on <b><?= parse_date($date) ?></b></h3>
                 <?php foreach($pics[$_GET['date']] as $photo): ?>
-                    <figure>
+                    <figure class="thumbnail">
                         <a href="<?= $photo['file'] ?>">
                             <img
                                 src="<?= $photo['thumbnail']['file'] ?>"
@@ -128,13 +130,8 @@ foreach($pics as $k => $blbl) {
 
     <script>
         var select = document.querySelector('#inputDate');
-
         select.addEventListener('change', function(e) {
-
-            console.log(location.protocol + '//' + location.hostname + '/'  + 'photos.php?date=' + select.value);
-
             location.href = location.protocol + '//' + location.hostname + '/'  + 'photos.php?date=' + select.value;
-
         }, false);
     </script>
 
