@@ -1,5 +1,5 @@
 <?php
-$title = 'Project';
+$title = 'Projet';
 require_once 'inc/header.php';
 ?>
     <main role="main">
