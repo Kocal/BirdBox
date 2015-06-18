@@ -12,16 +12,16 @@ h1 {
     padding: 1em 0;
 }
 
-figure {
-    display: inline-block;
-    margin: 0;
-}
-
 hr {
     border: 0;
     border-top: 1px solid #d1d1d1;
     border-bottom: 1px solid #f6f6f6;
 }
+
+img {
+    max-width: 100%
+}
+
 /**
  * 2. Agencement
  */
@@ -73,28 +73,11 @@ nav[role="navigation"] ul li a {
 }
 
 /**
- * Better HTML menu
- */
-.betterhtmlmenu-0 {
-    font-size: 1.3rem;
-    width: 100%;
-}
-
-.betterhtmlmenu-0 select {
-    width: 100%;
-}
-
-/**
  * Corps
  */
 .page-title {
     text-align: center;
 }
-
-.thin {
-    font-weight: normal;
-}
-
 /**
  * Footer
  */
@@ -108,6 +91,27 @@ footer[role="contentinfo"] {
 /**
  * 3. Modules
  */
+.thumbnail {
+    display: inline-block;
+    margin: 0;
+}
+
+figcaption {
+    font-style: italic;
+}
+
+/**
+ * Better HTML menu
+ */
+.betterhtmlmenu-0 {
+    font-size: 1.3rem;
+    width: 100%;
+}
+
+.betterhtmlmenu-0 select {
+    width: 100%;
+}
+
 /**
  * Le stream
  */
@@ -131,6 +135,23 @@ footer[role="contentinfo"] {
  */
 
 /**
+ * Le copyleft :3
+ */
+.copyleft {
+    display: inline-block;
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+}
+
+.text-thin {
+    font-weight: normal;
+}
+
+.text-center {
+    text-align: center
+}
+
+/**
  * 5. Thème
  */
 body {
@@ -139,6 +160,10 @@ body {
 
 header[role="banner"] {
     background-color: #55acee;
+}
+
+header[role="banner"] h1 {
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
 }
 
 header[role="banner"] a {
@@ -159,17 +184,15 @@ nav[role="navigation"] ul li a:hover {
     background: rgba(0, 0, 0, .1);
 }
 
+main[role="main"] {
+    line-height: 1.6rem
+}
+
 /**
  * Dégradés
  */
 .gd-white-grey {
     background: #fcfffe; /* Old browsers */
-    background: -moz-linear-gradient(top,  #fcfffe 0%, #eff2f2 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfffe), color-stop(100%,#eff2f2));
-    background: -webkit-linear-gradient(top,  #fcfffe 0%,#eff2f2 100%);
-    background: -o-linear-gradient(top,  #fcfffe 0%,#eff2f2 100%);
-    background: -ms-linear-gradient(top,  #fcfffe 0%,#eff2f2 100%);
     background: linear-gradient(to bottom,  #fcfffe 0%,#eff2f2 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfffe', endColorstr='#eff2f2',GradientType=0 );
-
 }
