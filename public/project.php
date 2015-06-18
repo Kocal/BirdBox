@@ -1,5 +1,5 @@
 <?php
-$title = 'Project';
+$title = 'Projet';
 require_once 'inc/header.php';
 ?>
     <main role="main">
@@ -81,6 +81,13 @@ require_once 'inc/header.php';
             <li><b>Détecteur de mouvement</b> : envoie un signal à la Raspberry Pi s'il détecte un oiseau</li>
         </ul>
 
+        <h4>Photo de la BirdBox</h4>
+        <p>Nous avons réalisé le circuit modélisé avec Fritzing, et nous obtenons donc ceci.</p>
+        <figure class="text-center">
+            <img src="/assets/img/le-projet.jpg" alt="Photo of theBirdbox">
+            <figcaption>Photo du projet</figcaption>
+        </figure>
+    
         <hr>
 
         <h3>Technologies utilisées</h3>
@@ -105,14 +112,7 @@ require_once 'inc/header.php';
         <h4>Stream.sh</h4>
         <p>Un sous-programme qui permet de démarrer une diffusion en direct sur le port <b>6666</b>.</p>
         <code data-gist-id="3b3bd1656ec3d1c25f98" data-gist-file="stream.sh"></code>
-
-<!--
-    <figure class="text-center">
-        <img src="http://lorempicsum.com/futurama/627/300/4" alt="BirdBox">
-        <figcaption>Photo of BirdBox</figcaption>
-    </figure> -->
     </main>
-
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.1/gist-embed.min.js"></script>
