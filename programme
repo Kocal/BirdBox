@@ -44,7 +44,7 @@ do
 			$gpio write $oiseau_entree 1
 
 			echo "[$la_date] Omg un oisal vient d'entrer !!!"
-			
+
 			# Cut le stream comme un porc
 			kill -9 `ps ax | grep $raspivid | tr -d '[:space:]' | grep -Eo '[0-9]*' | head -n 1`
 
