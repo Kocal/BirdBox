@@ -50,12 +50,30 @@ do
 
 			# Un oiseau est rentré, on prend une photo :d
 			$raspistill -t 1 -o "public/pics/"$la_date".jpg"
+			code=$?
+
+			# Tout va bien
+			if [ $code -eq 0 ]
+			then
+				echo "0" > "public/errors/photo"
+			else
+				echo "1" > "public/errors/photo"
+			fi
 
 			# Création de la miniature
 			$convert "public/pics/"$la_date".jpg" -gravity Center -thumbnail 300x200^ "public/pics/"$la_date"_thumbnail.jpg"
 
 			# On relance le stream
 			./stream&
+			code=$?
+
+			# Tout va bien
+			if [ $? -eq 0 ]
+			then
+				echo "0" > "public/errors/stream"
+			else
+				echo "1" > "public/errors/stream"
+			fi
 		else
 			$gpio write $oiseau_sortie 1
 			echo "[$la_date] Omg l'oisal est sorti !!"

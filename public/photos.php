@@ -74,6 +74,8 @@ foreach($pics as $k => $blbl) {
         </p>
         <hr/>
 
+	<?= (file_get_contents('errors/photo') == 1 ? "<div class='alert'><p>Il y a un problème avec la caméra, impossible de prendre des photos.</p></div>" : "") ?>
+
         <section>
             <?php if(empty($_GET['date']) || !empty($_GET['date']) && $_GET['date'] === 'all'): ?>
                 <?php foreach($pics as $date => $lesPhotos): ?>

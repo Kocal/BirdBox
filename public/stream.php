@@ -5,6 +5,9 @@ require_once 'inc/header.php';
 
     <main role="main">
         <h2 class="page-title">Streaming</h2>
+
+	<?= (file_get_contents('errors/stream') == 1 ? "<div class='alert'><p>Il y a un problème avec la caméra, impossible de diffuser en direct.</p></div>" : "") ?>
+
         <div id="video-jwplayer_wrapper" style="position: relative; display: block; width: 960px; height: 540px;">
             <object type="application/x-shockwave-flash" data="/jwplayer/jwplayer.flash.swf" width="100%" height="100%" bgcolor="#000000" id="video-jwplayer" name="video-jwplayer" tabindex="0">
                 <param name="allowfullscreen" value="true">
