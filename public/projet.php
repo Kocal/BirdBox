@@ -66,7 +66,7 @@ require_once 'inc/header.php';
         <hr>
 
         <h3>Schéma du circuit</h3>
-        <p>Nous avons réalisé un schéma du circuit électronique avec le logiciel <b>Fritzing</b> pour une meilleure présentation du circuit, mais aussi pour nous faciliter la tâche lors des montages/démontages quotidient du circuit.</p>
+        <p>Nous avons réalisé un schéma du circuit électronique avec le logiciel <b>Fritzing</b> pour une meilleure présentation du circuit, mais aussi pour nous faciliter la tâche lors des montages/démontages quotidien du circuit.</p>
         <figure class="text-center">
             <img src="/assets/img/schema.png" alt="Mindmap of the Birdbox">
             <figcaption>Schéma du circuit</figcaption>

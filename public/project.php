@@ -1,63 +1,52 @@
 <?php
-$title = 'Projet';
+$title = 'Project';
 require_once 'inc/header.php';
 ?>
     <main role="main">
         <h2 class="page-title">Our project: BirdBox</h2>
 
-        <p>Selon le sujet de notre projet de Semaine Spéciale, la Birdbox devra être capable de prendre une photo grâce
-        à un capteur qui déclenchera une prise de vue lorsqu'un oiseau viendra se nourrir ou rentrera dans son nid.</p>
-        <p>Afin d'améliorer le projet, nous avons rajouter d'autres fonctionnalités, comme la diffusion en direct de ce que la caméra "voit", et un site web qui permettra de visualiser les photos prises par la Birdbox, et la diffusion en direct.</p>
+	<p>According to the subject of our project of this special week, BirdBox must be hable to take photos with a sensor which will trigger a shooting when a bird inside the box.</p>
 
-        <p>Les fonctionnalités de la BirdBox sont donc les suivantes :</p>
-        <ul>
-            <li>Prise de vue lorsqu'un oiseau est détecté</li>
-            <li>Diffusion en direct sur un site web</li>
-            <li>Visualisation des prises de vues sur le site web</li>
-            <li>Visualisation de la diffusion en direct sur le site web</li>
-        </ul>
+	<p>To improve the project, we had some features, like streaming and a website which able us to watch photos taken by BirdBox, and watch the streaming.</p>
 
-        <hr>
 
-        <p>Afin de réaliser correctement projet, nous l'avons séparé en plusieurs modules de la manière suivante :</p>
-        <ul>
-            <li><b>Raspberry Pi (BirdBox)</b></li>
-            <li><b>Détecteur de mouvement</b></li>
-            <li><b>Caméra</b></li>
-            <li><b>Site web</b></li>
-        </ul>
+	<p>The BirdBox's features</p>
+	<ul>
+		<li>Shooting when a bird is detected</li>
+		<li>Viewing shoots on the website</li>
+		<li>Watch the streaming on the website</li>
+	</ul>
 
         <hr>
 
         <h3>Raspberry Pi</h3>
-        <p>C'est la <b>Raspberry Pi</b>, qui grâce à notre programme, sera chargée de faire intéragir correctement nos différents modules.</p>
+	<p>It is the <b>Raspberry Pi</b> which, due to the program, will be responsible to interact correctly with our differents modules.</p>
 
-        <h3>Détecteur de mouvement</h3>
-        <p>Le <b>Détecteur de mouvement</b> aura pour rôle de détecter un oiseau venant se nourrir ou rentrer dans son nid.</p>
+        <h3>Motion sensor</h3>
+	<p>The <b>Motion sensor</b> should be able to detect a bird when this one comes into the BirdBox.</p>
+    
+	<p>We want only takes photos when the bird comes into the BirdBox. <br>
+So we thought about a system which will be able to detect the bird's way, and then take a photo when the bird come in, and don't do anything when this bird left the BirdBox.<br/>
+One interesting thing would have to use two motion sensors. According to the order of detection of these, we could determine the bird's way.
+</p>
 
-        <p>Nous voulions que la BirdBox ne prenne des prises de vue <b>que</b> quand un oiseau rentre dans son nid, ou vient se nourrir.<br>
-        Nous avons donc pensé à un système permettant de trouver le sens de l'oiseau, et donc de prendre une prise de vue lorsqu'un oiseau rentre, et ne rien fait lorsqu'un oiseau sort. <br>
-        Une idée intéressante aurait été d'utiliser deux détecteurs de mouvements. Selon l'ordre de détection de ces derniers, on aurait donc pu déterminer le sens de l'oiseau.</p>
+	<p>But, we haven't two motion sensors. So our final solution was to took a photo <b>one time in two</b>.</p>
 
-        <p>Seul problème, nous ne possédons qu'un détecteur de mouvement. Notre solution finale était donc de prendre une prise de vue <b>une fois sur deux</b>.</p>
+        <h3>Camera</h3>
+	<p>The <b>camera</b>'s role would be to takes photos when the motion sensor detects something, but she will be able to streaming too.</p>
+	<p>During our development phase, we noticed that will be impossible to take photos during a stream.<br>
+But we found a solution an effective and dirty solution.<br>
+When the motion sensor detects a bird and say to the camera to take a photo, the streaming is cut, we take the photo, and we launch the stream after.</p>
+	<p>Moreover, when a photo is taken, we took the opportunity to generate a thumbnail in order to decrease the photos's webpage loading.</p>
 
-        <h3>Caméra</h3>
-        <p>La <b>Caméra</b> aura pour rôle de prendre des photos lorsque que le <b>détecteur de mouvement</b> détecte quelque chose, mais elle devra aussi être capable de diffuser du contenu en direct.</p>
-        <p>Pendant notre phase de développement, nous avons constaté qu'il était impossible de prendre des photos pendant une diffusion en direct. <br/>
-        Cependant, nous avons réussi à résoudre ce problème de <b>manière sale</b>, mais <b>efficace</b>. <br/>
-        Dès que le <b>détecteur de mouvement</b> détecte un oiseau et dit à la <b>caméra</b> de prendre une photo, la diffusion en directe est coupée, on prend la photo, et on relance ensuite la diffusion.</p>
-
-        <p>De plus, lorsqu'une photo est prise, on en profite pour génerer une miniature afin de diminuer le chargement de la page des photos.</p>
-
-        <h3>Site web</h3>
-        <p>Le <b>site web</b> où vous vous trouvez actuellement aura pour rôle d'afficher un lecteur multi-média permettant ainsi une visualisation de la diffusion en direct.<br/>
-        Il devra aussi permettre à l'utilisateur de voir les photos prises par la <b>BirdBox</b>.<br/>
-        De plus, l'utilisateur pourra voir soit toutes les photos en meme temps, soit les voir par date.</p>
-
+        <h3>Website</h3>
+	<p>This <b>website</b>'s role to display a media player in order to watch the stream.<br/>
+Of course, it will allow the user to see photos taken by the BirdBox, and sort them by date.</p>
+        
         <hr>
 
         <h3>Mindmap</h3>
-        <p>Ci-dessous une carte mentale résumant le fonctionnement de notre projet.</p>
+	<p>Below this, there is a mindmap which recap the functioning of our project.</p>
         <figure class="text-center">
             <img src="/assets/img/Carte mentale - English - Edited.png" alt="Mindmap of the Birdbox">
             <figcaption>Mindmap of the BirdBox</figcaption>
@@ -65,52 +54,53 @@ require_once 'inc/header.php';
 
         <hr>
 
-        <h3>Schéma du circuit</h3>
-        <p>Nous avons réalisé un schéma du circuit électronique avec le logiciel <b>Fritzing</b> pour une meilleure présentation du circuit, mais aussi pour nous faciliter la tâche lors des montages/démontages quotidient du circuit.</p>
+        <h3>Diagram of the electronic circuit</h3>
+	<p>We made a diagram of the electronic circuit with the software <b>Fritzing</b> for a better representation of the electronic circuit, but also to make our job easier during our daily assemblies and disassemblies.</p>
         <figure class="text-center">
             <img src="/assets/img/schema.png" alt="Mindmap of the Birdbox">
-            <figcaption>Schéma du circuit</figcaption>
+            <figcaption>Diagram of the circuit</figcaption>
         </figure>
 
-        <h4>Rôle des composants :</h4>
-        <ul>
-            <li><b>LED rouge (à gauche)</b> : Indique la mise sous tension de la Raspberry Pi</li>
-            <li><b>LED jaune</b> : Indique si le <b>détecteur de mouvement</b> a envoyé un signal</li>
-            <li><b>LED rouge (au milieu)</b> : Indique si l'oiseau <b>sort</b> de la cage</li>
-            <li><b>LED verte</b> : Indique si l'oiseau <b>entre</b> de la cage</li>
-            <li><b>Détecteur de mouvement</b> : envoie un signal à la Raspberry Pi s'il détecte un oiseau</li>
+        <h4>Role of the components:</h4>
+	<ul>
+            <li><b>Red DEL (on the left)</b> : shows power up of the Raspberry Pi</li>
+            <li><b>Yellow DEL</b> : shows if the <b>motion sensor</b> has send a signal</li>
+            <li><b>Red DEL (in the middle)</b> : shows if the bird <b>goes out</b> of the BirdBox.</li>
+            <li><b>Green DEL</b> : shows if the bird <b>goes in</b> the BirdBox.</li>
+            <li><b>Motion sensor</b> : send a signal to the Raspberry Pi when it detects something.</li>
         </ul>
 
-        <h4>Photo de la BirdBox</h4>
-        <p>Nous avons réalisé le circuit modélisé avec Fritzing, et nous obtenons donc ceci.</p>
+        <h4>BirdBox's photo</h4>
+	<p>We realized the circuit modelised with Fritzing, and we get this.</p>
         <figure class="text-center">
             <img src="/assets/img/le-projet.jpg" alt="Photo of theBirdbox">
-            <figcaption>Photo du projet</figcaption>
+            <figcaption>BirdBox</figcaption>
         </figure>
     
         <hr>
 
-        <h3>Technologies utilisées</h3>
+        <h3>Technologies used</h3>
         <h4>Application</h4>
-        <p>Le programme principal du projet a été écrit en <b>Bash</b></p>
+        <p>The main program of the project was written with the language <b>Bash</b>.</p>
 
-        <h4>Caméra</h4>
-        <p>La prise de photos se fait grâce au programme <b>raspistill</b>, et la diffusion de contenu en direct se fait grâce aux programme <b>raspivid</b>, <b>ffmpeg</b>, et <b>crtmpserver</b>.</p>
+        <h4>Camera</h4>
+        <p>The shooting is possible with the program <b>raspistill</b>, and the streaming with <b>raspivid</b>, <b>ffmpeg</b>, and <b>crtmpserver</b>.</p>
 
-        <h4>Détecteur de mouvement</h4>
-        <p>Le fonctionnement du détecteur de mouvement étant interne, nous avons juste à récupérer le signal sur le pin <i>OUT</i> pour savoir si un oiseau a été détecté ou non.</p>
+        <h4>Motion sensor</h4>
+	<p>The functioning of the motion sensor is internal, we just need to capture the signal on the <i>OUT</i> pin to know if something was detected or not.</p>
 
-        <h4>Site web</h4>
-        <p>La Raspberry Pi utilise le server web <b>Apache</b> pour héberger notre site web. Nous avons aussi utilisé les technologies <b>HTML</b> et <b>CSS</b> pour structurer le contenu et la mise en page, et enfin, nous avons aussi utilisé <b>PHP</b> pour la partie dynamique, comme récupérer les photos prises par la BirdBox et les afficher par date.</p>
+    	<h4>Website</h4>
+	<p>La Raspberry Pi use the webserver <b>Apache</b> to host our website. We also used <b>HTML</b> and <b>CSS</b> to structure the content and the layout. And we also used <b>PHP</b> for the dynamic part, like get photos taken and display those per date.</p>
+
         <hr>
 
-        <h3>Code du projet</h3>
+        <h3>Project code</h3>
         <h4>Programme.sh</h4>
-        <p>C'est le programme principal. C'est lui qui gère les entrées et sorties, ainsi que la coordination entre les différents composants.</p>
+	<p>It is the main program. It manages the inputs/outputs, as well as the coordination between the differents components.</p>
         <code data-gist-id="3b3bd1656ec3d1c25f98" data-gist-file="programme.sh"></code>
 
         <h4>Stream.sh</h4>
-        <p>Un sous-programme qui permet de démarrer une diffusion en direct sur le port <b>6666</b>.</p>
+        <p>A subprogram which permit to start a stream on the 6666 port.</p>
         <code data-gist-id="3b3bd1656ec3d1c25f98" data-gist-file="stream.sh"></code>
     </main>
 
