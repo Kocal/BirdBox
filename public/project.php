@@ -96,12 +96,12 @@ Of course, it will allow the user to see photos taken by the BirdBox, and sort t
 
         <h3>Project code</h3>
         <h4>Programme.sh</h4>
-	<p>It is the main program. It manages the inputs/outputs, as well as the coordination between the differents components.</p>
-        <code data-gist-id="3b3bd1656ec3d1c25f98" data-gist-file="programme.sh"></code>
+	<p>It is the main program. It manages the inputs/outputs, as well as the coordination between the differents components.<br/><a href="viewfile.php?file=program">View this file by clicking here</a>.</p>
+        <!--<code data-gist-id="3b3bd1656ec3d1c25f98" data-gist-file="programme.sh"></code>-->
 
         <h4>Stream.sh</h4>
-        <p>A subprogram which permit to start a stream on the 6666 port.</p>
-        <code data-gist-id="3b3bd1656ec3d1c25f98" data-gist-file="stream.sh"></code>
+        <p>A subprogram which permit to start a stream on the 6666 port.<br/><a href="viewfile.php?file=stream">View this file by clicking here</a>.</p>
+        <!--<code data-gist-id="3b3bd1656ec3d1c25f98" data-gist-file="stream.sh"></code>-->
     </main>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
