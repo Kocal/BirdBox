@@ -1,0 +1,102 @@
+#!/bin/sh
+
+## Quand le script est exécuté au démarrage, la variable $PATH est encore vide.
+gpio="/usr/local/bin/gpio"
+raspistill="/usr/bin/raspistill"
+raspivid="/usr/bin/raspivid"
+convert="/usr/bin/convert"
+
+## Définition des pins
+detect_ext=1
+detect_int=0
+oiseau_entree1=5
+oiseau_entree2=4
+
+## Définition du mode des pins
+$gpio mode $detect_ext in
+$gpio mode $detect_int in
+$gpio mode $oiseau_entree1 out
+$gpio mode $oiseau_entree2 out
+
+## Les fonctions
+debug() {            
+    echo "int: `$gpio read $detect_int`"
+    echo "ext: `$gpio read $detect_ext`"
+}
+
+oiseau_photo() {
+    # Cut le stream comme un porc
+	kill -9 `ps ax | grep $raspivid | tr -d '[:space:]' | grep -Eo '[0-9]*' | head -n 1`
+
+	# Un oiseau est rentré, on prend une photo :d
+	$raspistill -t 1 -o "public/pics/"$la_date".jpg"
+	code=$?
+
+	# Tout va bien
+	if [ $code -eq 0 ]
+	then
+		echo "0" > "public/errors/photo"
+	else
+		echo "1" > "public/errors/photo"
+	fi
+
+	# Création de la miniature
+	$convert "public/pics/"$la_date".jpg" -gravity Center -thumbnail 300x200^ "public/pics/"$la_date"_thumbnail.jpg"
+
+	# On relance le stream
+	./stream&
+	code=$?
+
+	# Tout va bien
+	if [ $? -eq 0 ]
+	then
+		echo "0" > "public/errors/stream"
+	else
+		echo "1" > "public/errors/stream"
+	fi
+}
+
+## Programme
+while true
+do
+	la_date=`date "+%Y-%m-%d_%H-%M-%S-%2N"`
+
+	# On attend 500 ms pour ne pas surcharger la Raspberry <3
+	sleep .5
+    debug
+
+	# Se déclenche quand un oiseau passe devant le détecteur extérieur, mais pas celui à l'intérieur
+	if [ `$gpio read $detect_ext` -eq 1 ] && [ `$gpio read $detect_int` -eq 0 ]
+	then
+        echo "Vient de passer devant le détecteur extérieur"
+        $gpio write $oiseau_entree1 1
+
+        # En attendant que l'oiseau passe devant le détecteur intérieur...
+        while [ `$gpio read $detect_int` -eq 0 ]
+        do
+            debug
+            sleep 1
+            echo "Allez bouge oiseau !!!"
+        done
+
+        $gpio write $oiseau_entree2 1
+        echo "L'oisal est rentré, PHOTO !!!!!!!!!!§§!"
+        oiseau_photo
+
+        # On attend que les détecteurs se calment
+        while [ `$gpio read $detect_ext` -eq 1 ] && [ `$gpio read $detect_int` -eq 1 ]
+        do
+            debug
+            echo "L'oiseau va sortir"
+            sleep .1
+        done
+
+        # oui
+        $gpio write $oiseau_entree1 0
+        $gpio write $oiseau_entree2 0
+    
+    else
+        echo "Pas d'oiseau à l'horizon. :^)"
+    fi
+done
+
