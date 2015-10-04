@@ -40,8 +40,10 @@ oiseau_photo() {
 		echo "1" > "public/errors/photo"
 	fi
 
-	# Création de la miniature
-	$convert "public/pics/"$la_date".jpg" -gravity Center -thumbnail 300x200^ "public/pics/"$la_date"_thumbnail.jpg"
+    # On réduit le poids de la photo (2 Mo c'est fat quand même^^=))
+    $convert "public/pics/"$la_date".jpg" -quality 95 "public/pics/"$la_date".jpg"
+    # Création de la miniature
+	$convert "public/pics/"$la_date".jpg" -gravity Center -thumbnail 300x200^ -quality 70 "public/pics/"$la_date"_thumbnail.jpg"
 
 	# On relance le stream
 	./stream&
